@@ -36,10 +36,13 @@ function App() {
       <Switch>
         <Route exact patch="/">
           {detailView ? (
+            <SongDetail goBack={goBack}
+            />
+          ): (<div>
             <SearchBar />
             <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
-          ): (
-            <SongDetail goBack={goBack}/>
+            </div>
+            
           )
         }
         </Route>
