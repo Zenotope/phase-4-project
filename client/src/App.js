@@ -1,6 +1,5 @@
 import './App.css';
 import { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from './Components/Navbar'
 import Favorites from './Components/Favorites';
 import Search from './Components/Search';
