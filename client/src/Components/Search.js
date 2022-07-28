@@ -1,7 +1,7 @@
 import SongCard from "./SongCard"
 
 
-function Search({tracks}){
+function Search({tracks, onMoreInfoClick}){
 
     const trackCollection = tracks.map((track) =>(
         <SongCard
@@ -11,23 +11,12 @@ function Search({tracks}){
         artists ={track.artists[0].name}
         album = {track.album.name}
         albumArt = {track.album.images[1].url}
+        onMoreInfoClick = {onMoreInfoClick}
         />
     ))
      
     return(
         <div id="search">
-                    <form action="/" method="get">
-                <label htmlFor="header-search">
-                    <span className="visually-hidden"></span>
-                </label>
-                <input
-                    type="text"
-                    id="header-search"
-                    placeholder="Search Songs"
-                    name="s" 
-                />
-                <button type="submit">Search</button>
-            </form>
             <div>
                 {trackCollection}
             </div>
