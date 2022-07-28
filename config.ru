@@ -2,5 +2,14 @@
 
 require_relative "config/environment"
 
-run Rails.application
+
+
+# use Rack::Cors do
+#     allow do
+#       origins '*' # allow requests from ALL frontend origins
+#       resource '*', headers: :any, methods: [:get, :post, :delete, :put, :patch, :options, :head]
+#     end
+#   end
+
+  run Rails.application
 Rails.application.load_server
