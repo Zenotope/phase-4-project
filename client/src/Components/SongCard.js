@@ -1,7 +1,7 @@
 function SongCard(){
     return(
-        <div>
-
+        <div className="songCard">
+            <img/>
         </div>
     )
 }
