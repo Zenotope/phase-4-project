@@ -1,20 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
-
 import { useState, useEffect } from "react";
+import Navbar from './Components/Navbar'
+import Favorites from './Components/Favorites';
+import Search from './Components/Search';
+import SongDetail from './Components/SongDetail';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [tracks, setTracks] = useState({})
 
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
+  useEffect(() =>{
+    fetch('http://localhost:3000/tracks')
+    .then(res => res.json())
+    .then((tracks) => setTracks(tracks))
+  }, [])
+
+  // console.log(tracks)
 
   return (
     <div className="App">
-      <h1>Page Count: {count}</h1>
+      <Navbar/>
+      <Search tracks={tracks}/>
     </div>
   );
 }
