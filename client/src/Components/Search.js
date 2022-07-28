@@ -1,16 +1,20 @@
-import TextField from "@mui/material/TextField";
+
 
 function Search(){
     return(
         <div>
-            <div className="search">
-                <TextField
-                    id="outlined-basic"
-                    variant="outlined"
-                    fullWidth
-                    label="Search"
-                />
-            </div>
+            <form action="/" method="get">
+        <label htmlFor="header-search">
+            <span className="visually-hidden"></span>
+        </label>
+        <input
+            type="text"
+            id="header-search"
+            placeholder="Search Songs"
+            name="s" 
+        />
+        <button type="submit">Search</button>
+    </form>
         </div>
     )
 }
