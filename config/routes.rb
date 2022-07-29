@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
 
   get "/tracks", to: "tracks#index"
+  get "/details", to: "details#show"
 
+  get "/songid", to: "song_id#show"
+  # post "/songid", to: "songId#create"
+  # delete "/songid", to: "songId#destroy"
 
 end

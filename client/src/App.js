@@ -12,6 +12,7 @@ function App() {
   const [tracks, setTracks] = useState([])
   const [detailView, setDetailView] = useState(false)
   const [songSelection, setSongSelection] = useState({})
+  const [details, setDetails] = useState([])
 
   useEffect(() =>{
     fetch('http://localhost:3000/tracks')
@@ -19,12 +20,31 @@ function App() {
     .then((tracks) => setTracks(tracks))
   }, [])
 
+  useEffect(()=> {
+    fetch('http://localhost:3000/details')
+    .then(res => res.json())
+    .then((details)=> setDetails(details))
+  }, [])
 
-
-  function onMoreInfoClick(e, song){
+  function onMoreInfoClick(e, track){
     setDetailView(true)
-    setSongSelection(song)
+    console.log(track.id)
+    
+    // fetch("http://localhost:3000/songid",{
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //    },
+    //    body: JSON.stringify(track.id)
+    // })
+    // .then((r) => r.json())
+    // .then((newParty) => console.log(track.id))
+  
+    setSongSelection(track)
+   
+
   }
+
   function goBack(){
     setDetailView(false)
   }
@@ -36,7 +56,10 @@ function App() {
       <Switch>
         <Route exact patch="/">
           {detailView ? (
-            <SongDetail goBack={goBack}
+            <SongDetail 
+              goBack={goBack}
+              details ={details}
+              track={songSelection}
             />
           ): (<div>
             <SearchBar />

@@ -1,11 +1,12 @@
-function SongCard({name, artists, id, album, albumArt, onMoreInfoClick}){
+function SongCard({name, artists, id, album, albumArt, onMoreInfoClick, track}){
+    
     return(
         <div className="songCard">
             <img src={albumArt}/>
             <h3>{name}</h3>
             <h3>{artists}</h3>
             <h3>{album}</h3>
-            <button onClick={onMoreInfoClick}>More Info</button>
+            <button onClick={(e)=> onMoreInfoClick(e, track)} >More Info</button>
             <button>Add To Favorites</button>
         </div>
     )
