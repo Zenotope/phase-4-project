@@ -12,6 +12,7 @@ function Search({tracks, onMoreInfoClick}){
         album = {track.album.name}
         albumArt = {track.album.images[1].url}
         onMoreInfoClick = {onMoreInfoClick}
+        track= {track}
         />
     ))
      
