@@ -19,7 +19,7 @@ function Search({tracks, onMoreInfoClick}){
      
     return(
         <div id="search" >
-            <div class="grid-container">
+            <div className="grid-container">
                 {trackCollection}
             </div>
         </div>
