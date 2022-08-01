@@ -7,6 +7,7 @@ import Search from './Components/Search';
 import SongDetail from './Components/SongDetail';
 import SearchBar from './Components/SearchBar';
 import Login from './Components/Login';
+import { useHistory } from 'react-router-dom';
 
 function App() {
   const [tracks, setTracks] = useState([])
@@ -14,13 +15,17 @@ function App() {
   const [songSelection, setSongSelection] = useState({})
   const [user, setUser] = useState(null)
   const [isLogOn, setIsLogOn] = useState(false)
+  const [details, setDetails] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+  const[searchInput, setSearchInput] = useState("")
+  const [trackId, setTrackId] = useState("")
 
   //note: can use 'helper functions'
   useEffect(() =>{
-    fetch('http://localhost:3000/tracks')
+    fetch(`http://localhost:3000/tracks/${searchTerm}`)
     .then(res => res.json())
     .then((tracks) => setTracks(tracks))
-  }, [])
+  }, [searchTerm])
 
   //keeps user logged in after page refresh
   useEffect(() =>{
@@ -33,13 +38,34 @@ function App() {
     })
   }, [])
 
+  useEffect(()=> {
+    fetch(`http://localhost:3000/details/${trackId}`)
+    .then(res => res.json())
+    .then((details)=> setDetails(details))
+  }, [trackId])
 
-  function onMoreInfoClick(e, song){
-    setDetailView(true)
-    setSongSelection(song)
+
+  function handleChange(input){
+   setSearchInput(input)
   }
+
+  const searchClick = (e) =>{
+    e.preventDefault()
+    setSearchTerm(searchInput) 
+  }
+
+  const history = useHistory(); 
+  function onMoreInfoClick(e, track){
+    setDetailView(true)
+    history.push(`/details/?id=${track.id}`)
+    setTrackId(track.id)
+    setSongSelection(track)
+   
+  }
+
   function goBack(){
     setDetailView(false)
+    history.push("/")
   }
 
   function loginToggle(){
@@ -63,10 +89,13 @@ function App() {
       <Switch>
         <Route exact path="/">
           {detailView ? (
-            <SongDetail goBack={goBack}
+            <SongDetail 
+              goBack={goBack}
+              details ={details}
+              track={songSelection}
             />
           ): (<div>
-            <SearchBar />
+            <SearchBar searchClick={searchClick} handleChange={handleChange}/>
             <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
             </div>
           )

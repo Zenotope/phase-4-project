@@ -57,3 +57,4 @@ gem 'figaro'
 gem 'rest-client', '~> 2.0.2'
 
 gem 'rack-cors'
+

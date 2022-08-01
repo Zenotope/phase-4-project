@@ -1,7 +1,11 @@
-function SearchBar(){
+
+function SearchBar({searchClick, handleChange}){
+  
+
+
     return(
         <div>
-            <form action="/" method="get">
+            <form action="/tracks/" method="GET" onSubmit={(e)=> searchClick(e)}>
                 <label htmlFor="header-search">
                     <span className="visually-hidden"></span>
                 </label>
@@ -10,9 +14,11 @@ function SearchBar(){
                     id="header-search"
                     placeholder="Search Songs"
                     name="s" 
+                    onChange={(e)=> handleChange(e.target.value)}
                 />
-                <button type="submit">Search</button>
+                <button type="submit" >Search</button>
             </form>
+   
         </div>
     )
 }

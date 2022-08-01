@@ -13,8 +13,16 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+  get "/tracks", to: 'tracks#test'
+  get "/tracks/:s", to: "tracks#search"
+  # get "/tracks/search", to "tracks#search"
 
-  get "/tracks", to: "tracks#index"
+  get "/details/:id", to: "details#show"
 
+  get "/songid", to: "song_id#show"
+  # post "/songid", to: "songId#create"
+  # delete "/songid", to: "songId#destroy"
+
+ 
 
 end
