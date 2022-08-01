@@ -4,9 +4,13 @@ function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick,
         <div className="songCard">
             <img src={albumArt}/>
             {/* <audio src={preview}></audio> */}
-            <h3>{name}</h3>
-            <h3>{artists}</h3>
-            <h3>{album}</h3>
+            <div></div>
+            <b>{name}</b>
+            <div></div>
+            <b>{artists}</b>
+            <div></div>
+            <b>{album}</b>
+            <div></div>
             <button onClick={(e)=> onMoreInfoClick(e, track)} >More Info</button>
             <button>Add To Favorites</button>
         </div>
