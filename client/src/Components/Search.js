@@ -11,14 +11,15 @@ function Search({tracks, onMoreInfoClick}){
         artists ={track.artists[0].name}
         album = {track.album.name}
         albumArt = {track.album.images[1].url}
+        preview = {track.preview_url}
         onMoreInfoClick = {onMoreInfoClick}
         track= {track}
         />
     ))
      
     return(
-        <div id="search">
-            <div>
+        <div id="search" >
+            <div class="grid-container">
                 {trackCollection}
             </div>
         </div>

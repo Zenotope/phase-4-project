@@ -1,5 +1,4 @@
 function SongDetail({goBack, details, track}){
-    console.log(track)
     return(
         <div>
             <button onClick={goBack}>Go Back</button>

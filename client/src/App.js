@@ -7,46 +7,50 @@ import Search from './Components/Search';
 import SongDetail from './Components/SongDetail';
 import SearchBar from './Components/SearchBar';
 import Login from './Components/Login';
+import { useHistory } from 'react-router-dom';
 
 function App() {
   const [tracks, setTracks] = useState([])
   const [detailView, setDetailView] = useState(false)
   const [songSelection, setSongSelection] = useState({})
   const [details, setDetails] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
+  const[searchInput, setSearchInput] = useState("")
+  const [trackId, setTrackId] = useState("")
 
   useEffect(() =>{
-    fetch('http://localhost:3000/tracks')
+    fetch(`http://localhost:3000/tracks/${searchTerm}`)
     .then(res => res.json())
     .then((tracks) => setTracks(tracks))
-  }, [])
+  }, [searchTerm])
 
   useEffect(()=> {
-    fetch('http://localhost:3000/details')
+    fetch(`http://localhost:3000/details/${trackId}`)
     .then(res => res.json())
     .then((details)=> setDetails(details))
-  }, [])
+  }, [trackId])
 
+  function handleChange(input){
+   setSearchInput(input)
+  }
+
+  const searchClick = (e) =>{
+    e.preventDefault()
+    setSearchTerm(searchInput) 
+  }
+
+  const history = useHistory(); 
   function onMoreInfoClick(e, track){
     setDetailView(true)
-    console.log(track.id)
-    
-    // fetch("http://localhost:3000/songid",{
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //    },
-    //    body: JSON.stringify(track.id)
-    // })
-    // .then((r) => r.json())
-    // .then((newParty) => console.log(track.id))
-  
+    history.push(`/details/?id=${track.id}`)
+    setTrackId(track.id)
     setSongSelection(track)
    
-
   }
 
   function goBack(){
     setDetailView(false)
+    history.push("/")
   }
 
 
@@ -62,7 +66,7 @@ function App() {
               track={songSelection}
             />
           ): (<div>
-            <SearchBar />
+            <SearchBar searchClick={searchClick} handleChange={handleChange}/>
             <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
             </div>
             
