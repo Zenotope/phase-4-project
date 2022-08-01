@@ -1,16 +1,43 @@
-import { Link } from 'react-router-dom'
+import {useState} from "react";
 
-function Login() {
+function Login({onLogin, loginToggle}) {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
+    function handleSubmit(e){
+        e.preventDefault()
+        fetch('/login', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            }),
+        })
+        .then(res => res.json())
+        .then(data => onLogin(data))
+    }
+
+
     return(
-        <>
-        <nav>
-            <Link to="/login">Login</Link>
-        </nav>
-        <input>
-
-        </input>
-        </>
+        <div className="login-box">
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <small>Username</small>
+                    <input type="text" name="username" value={username} onChange={e => setUsername(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <small>Password</small>
+                    <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <button type="submit" onClick={loginToggle}>Login</button>
+                </div>
+            </form>
+        </div>
     )
 }
-
 export default Login
