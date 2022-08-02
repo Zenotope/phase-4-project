@@ -19,6 +19,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const[searchInput, setSearchInput] = useState("")
   const [trackId, setTrackId] = useState("")
+  const [favorites, setFavorites] = useState([])
 
   //note: can use 'helper functions'
   useEffect(() =>{
@@ -44,6 +45,12 @@ function App() {
     .then((details)=> setDetails(details))
   }, [trackId])
 
+  useEffect(()=>{
+    fetch('http://localhost:3000/favorites')
+    .then(res => res.json())
+    .then((favorites)=> setFavorites(favorites))
+  }, [])
+ 
 
   function handleChange(input){
    setSearchInput(input)
@@ -55,12 +62,11 @@ function App() {
   }
 
   const history = useHistory(); 
-  function onMoreInfoClick(e, track){
+  function onMoreInfoClick(e, track, id){
     setDetailView(true)
-    history.push(`/details/?id=${track.id}`)
+    history.push(`/details/?id=${id}`)
     setTrackId(track.id)
     setSongSelection(track)
-   
   }
 
   function goBack(){
@@ -81,7 +87,11 @@ function App() {
     window.sessionStorage.setItem('MY_APP_STATE', JSON.stringify(isLogOn))
   }, [isLogOn]);
 
-  console.log(isLogOn)
+function onRemoveFavorite(id){
+  setFavorites((favorites) =>
+  favorites.filter((favorite) => favorite.id !== id))
+  console.log(id);
+}
 
   return (
     <div className="App">
@@ -100,6 +110,9 @@ function App() {
             </div>
           )
         }
+        </Route>
+        <Route path='/favorites'>
+          <Favorites favorites={favorites} onMoreInfoClick={onMoreInfoClick} onRemoveFavorite={onRemoveFavorite}/>
         </Route>
         <Route path="/login">
           <Login onLogin={setUser} loginToggle={loginToggle} />
