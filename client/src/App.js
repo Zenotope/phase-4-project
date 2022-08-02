@@ -8,6 +8,7 @@ import SongDetail from './Components/SongDetail';
 import SearchBar from './Components/SearchBar';
 import Login from './Components/Login';
 import { useHistory } from 'react-router-dom';
+import CreateAccount from './Components/CreateAccount';
 
 function App() {
   const [tracks, setTracks] = useState([])
@@ -35,9 +36,16 @@ function App() {
       if (res.ok) {
         res.json()
         .then(user => setUser(user))
+        .then(setIsLogOn(true))
       }
     })
   }, [])
+
+  function loginToggle(){
+    {isLogOn === true ? setIsLogOn(true) : setIsLogOn(false)}
+    window.sessionStorage.setItem('MY_APP_STATE', isLogOn)
+    window.sessionStorage.getItem('MY_APP_STATE')
+  }
 
   useEffect(()=> {
     fetch(`http://localhost:3000/details/${trackId}`)
@@ -93,9 +101,10 @@ function onRemoveFavorite(id){
   console.log(id);
 }
 
+
   return (
     <div className="App">
-      <NavBar loginToggle={loginToggle} isLogOn={isLogOn} />
+      <NavBar loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
       <Switch>
         <Route exact path="/">
           {detailView ? (
@@ -115,7 +124,10 @@ function onRemoveFavorite(id){
           <Favorites favorites={favorites} onMoreInfoClick={onMoreInfoClick} onRemoveFavorite={onRemoveFavorite}/>
         </Route>
         <Route path="/login">
-          <Login onLogin={setUser} loginToggle={loginToggle} />
+          <Login onLogin={setUser} loginToggle={loginToggle} setIsLogOn={setIsLogOn} />
+        </Route>
+        <Route path="/new_user">
+          <CreateAccount onLogin={setUser} setIsLogOn={setIsLogOn} />
         </Route>
       </Switch>
     </div>
