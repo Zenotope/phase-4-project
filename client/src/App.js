@@ -8,6 +8,7 @@ import SongDetail from './Components/SongDetail';
 import SearchBar from './Components/SearchBar';
 import Login from './Components/Login';
 import { useHistory } from 'react-router-dom';
+import CreateAccount from './Components/CreateAccount';
 
 function App() {
   const [tracks, setTracks] = useState([])
@@ -95,6 +96,9 @@ function App() {
         </Route>
         <Route path="/login">
           <Login onLogin={setUser} loginToggle={loginToggle} setIsLogOn={setIsLogOn} />
+        </Route>
+        <Route path="/new_user">
+          <CreateAccount onLogin={setUser} setIsLogOn={setIsLogOn} />
         </Route>
       </Switch>
     </div>
