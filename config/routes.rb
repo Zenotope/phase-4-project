@@ -18,7 +18,10 @@ Rails.application.routes.draw do
 
   get "/details/:id", to: "details#show"
 
-
+  get '/favorites', to: 'favorites#index'
+  get 'favorites/:songId', to: 'favorites#show'
+  post '/favorites', to: 'favorites#add'
+  delete '/favorites/:songId', to: 'favorites#destroy'
  
 
 end
