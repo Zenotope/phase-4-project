@@ -34,9 +34,16 @@ function App() {
       if (res.ok) {
         res.json()
         .then(user => setUser(user))
+        .then(setIsLogOn(true))
       }
     })
   }, [])
+
+  function loginToggle(){
+    {isLogOn === true ? setIsLogOn(true) : setIsLogOn(false)}
+    window.sessionStorage.setItem('MY_APP_STATE', isLogOn)
+    window.sessionStorage.getItem('MY_APP_STATE')
+  }
 
   useEffect(()=> {
     fetch(`http://localhost:3000/details/${trackId}`)
@@ -68,24 +75,9 @@ function App() {
     history.push("/")
   }
 
-  function loginToggle(){
-    {user ? setIsLogOn(true) : setIsLogOn(false)}
-  }
-
-  useEffect(() => {
-    const data = window.sessionStorage.getItem('MY_APP_STATE');
-    if (data !== null) setIsLogOn(JSON.parse(data));
-  }, []);
-
-  useEffect(() => {
-    window.sessionStorage.setItem('MY_APP_STATE', JSON.stringify(isLogOn))
-  }, [isLogOn]);
-
-  console.log(isLogOn)
-
   return (
     <div className="App">
-      <NavBar loginToggle={loginToggle} isLogOn={isLogOn} />
+      <NavBar loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
       <Switch>
         <Route exact path="/">
           {detailView ? (
@@ -102,7 +94,7 @@ function App() {
         }
         </Route>
         <Route path="/login">
-          <Login onLogin={setUser} loginToggle={loginToggle} />
+          <Login onLogin={setUser} loginToggle={loginToggle} setIsLogOn={setIsLogOn} />
         </Route>
       </Switch>
     </div>

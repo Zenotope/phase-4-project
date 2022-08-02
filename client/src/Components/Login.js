@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-function Login({onLogin, loginToggle}) {
+function Login({onLogin, loginToggle, setIsLogOn}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
@@ -19,6 +19,7 @@ function Login({onLogin, loginToggle}) {
         })
         .then(res => res.json())
         .then(data => onLogin(data))
+        .then(setIsLogOn(true))
     }
 
 
@@ -35,6 +36,7 @@ function Login({onLogin, loginToggle}) {
                 </div>
                 <div className="form-group">
                     <button type="submit" onClick={loginToggle}>Login</button>
+                    {/* <button type="submit" onClick={loginToggle}>Login</button> */}
                 </div>
             </form>
         </div>

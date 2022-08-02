@@ -4,7 +4,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function NavBar({loginToggle, isLogOn}) {
+function NavBar({isLogOn, setIsLogOn}) {
+
+    function handleLogout(){
+        fetch("/logout", {
+            method: "DELETE",
+        })
+        .then(() => setIsLogOn(false))
+    }
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -27,7 +35,7 @@ function NavBar({loginToggle, isLogOn}) {
             </NavDropdown>
           </Nav>
           <Nav>
-            {isLogOn ? <Nav.Link href="login" onClick={loginToggle}>Logout</Nav.Link> : <Nav.Link href="login">Login</Nav.Link>}
+            {isLogOn ? <Nav.Link href="login" onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link href="login">Login</Nav.Link>}
           </Nav> 
         </Navbar.Collapse>
       </Container>
