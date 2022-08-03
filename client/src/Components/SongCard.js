@@ -1,6 +1,7 @@
 function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick, track, onRemoveFavorite, favId}){
     
     
+    
     function handleAddFavorite(){
         const favoriteData = {
             songId: id,
@@ -22,7 +23,7 @@ function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick,
     function handleRemoveFavorite(){
         fetch(`/favorites/${track.id}`, {
           method: "DELETE",
-        }).then((r) => r.json())
+        })
         .then(()=> onRemoveFavorite(track.id))
       }
 

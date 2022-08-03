@@ -52,6 +52,7 @@ function App() {
     .then(res => res.json())
     .then((details)=> setDetails(details))
   }, [trackId])
+  
 
   useEffect(()=>{
     fetch('http://localhost:3000/favorites')
@@ -70,11 +71,12 @@ function App() {
   }
 
   const history = useHistory(); 
+  
   function onMoreInfoClick(e, track, id){
     setDetailView(true)
-    history.push(`/details/?id=${id}`)
-    setTrackId(track.id)
     setSongSelection(track)
+    setTrackId(track.id)
+    history.push(`/details/${id}`)
   }
 
   function goBack(){
@@ -96,9 +98,10 @@ function App() {
   }, [isLogOn]);
 
 function onRemoveFavorite(id){
-  setFavorites((favorites) =>
-  favorites.filter((favorite) => favorite.id !== id))
-  console.log(id);
+  console.log(favorites);
+   const updatedFavorties =
+  favorites.filter((favorite) => favorite.id !== id)
+  setFavorites(updatedFavorties)
 }
 
 
@@ -107,19 +110,16 @@ function onRemoveFavorite(id){
       <NavBar loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
       <Switch>
         <Route exact path="/">
-          {detailView ? (
-            <SongDetail 
+            <SearchBar searchClick={searchClick} handleChange={handleChange}/>
+            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
+            </Route>
+          <Route path='/details/:id'>
+          <SongDetail 
               goBack={goBack}
               details ={details}
               track={songSelection}
             />
-          ): (<div>
-            <SearchBar searchClick={searchClick} handleChange={handleChange}/>
-            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
-            </div>
-          )
-        }
-        </Route>
+          </Route>
         <Route path='/favorites'>
           <Favorites favorites={favorites} onMoreInfoClick={onMoreInfoClick} onRemoveFavorite={onRemoveFavorite}/>
         </Route>
@@ -135,3 +135,19 @@ function onRemoveFavorite(id){
 }
 
 export default App;
+
+
+{/* <Route exact path="/">
+          {detailView ? (
+            <SongDetail 
+              goBack={goBack}
+              details ={details}
+              track={songSelection}
+            />
+          ): (<div>
+            <SearchBar searchClick={searchClick} handleChange={handleChange}/>
+            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
+            </div>
+          )
+          }
+          </Route>  */}
