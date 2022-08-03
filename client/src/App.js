@@ -71,18 +71,32 @@ function App() {
   }
 
   const history = useHistory(); 
-  
+
   function onMoreInfoClick(e, track, id){
     setDetailView(true)
     setSongSelection(track)
-    setTrackId(track.id)
+    setTrackId(id)
     history.push(`/details/${id}`)
   }
+  
 
   function goBack(){
     setDetailView(false)
     history.push("/home")
   }
+
+  function loginToggle(){
+    {user ? setIsLogOn(true) : setIsLogOn(false)}
+  }
+
+  useEffect(() => {
+    const data = window.sessionStorage.getItem('MY_APP_STATE');
+    if (data !== null) setIsLogOn(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem('MY_APP_STATE', JSON.stringify(isLogOn))
+  }, [isLogOn]);
 
 function onRemoveFavorite(id){
   console.log(favorites);
@@ -103,14 +117,21 @@ function onRemoveFavorite(id){
             <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack} />
             </Route>
           <Route path='/details/:id'>
-          <SongDetail 
+            <SongDetail 
               goBack={goBack}
               details ={details}
               track={songSelection}
             />
           </Route>
         <Route path='/favorites'>
-          <Favorites favorites={favorites} onMoreInfoClick={onMoreInfoClick} onRemoveFavorite={onRemoveFavorite} isLogOn={isLogOn} />
+
+          <Favorites 
+            favorites={favorites}
+            onMoreInfoClick={onMoreInfoClick} 
+            onRemoveFavorite={onRemoveFavorite}
+            track={songSelection}/>
+            isLogOn={isLogOn} />
+
         </Route>
         <Route path="/login">
           <Login onLogin={setUser} loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />

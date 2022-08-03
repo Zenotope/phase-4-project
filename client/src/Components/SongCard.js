@@ -1,7 +1,6 @@
 function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick, track, onRemoveFavorite, favId}){
     
-    
-    
+    console.log(track)
     function handleAddFavorite(){
         const favoriteData = {
             songId: id,
