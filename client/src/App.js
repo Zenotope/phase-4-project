@@ -82,19 +82,6 @@ function App() {
     history.push("/")
   }
 
-  function loginToggle(){
-    {user ? setIsLogOn(true) : setIsLogOn(false)}
-  }
-
-  useEffect(() => {
-    const data = window.sessionStorage.getItem('MY_APP_STATE');
-    if (data !== null) setIsLogOn(JSON.parse(data));
-  }, []);
-
-  useEffect(() => {
-    window.sessionStorage.setItem('MY_APP_STATE', JSON.stringify(isLogOn))
-  }, [isLogOn]);
-
 function onRemoveFavorite(id){
   setFavorites((favorites) =>
   favorites.filter((favorite) => favorite.id !== id))
