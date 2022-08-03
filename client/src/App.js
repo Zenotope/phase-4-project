@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from "react";
 import { Route, Switch } from 'react-router-dom'
 import NavBar from './Components/NavBar'
+import About from './Components/About';
 import Favorites from './Components/Favorites';
 import Search from './Components/Search';
 import SongDetail from './Components/SongDetail';
@@ -18,11 +19,10 @@ function App() {
   const [isLogOn, setIsLogOn] = useState(false)
   const [details, setDetails] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
-  const[searchInput, setSearchInput] = useState("")
+  const [searchInput, setSearchInput] = useState("")
   const [trackId, setTrackId] = useState("")
   const [favorites, setFavorites] = useState([])
 
-  //note: can use 'helper functions'
   useEffect(() =>{
     fetch(`http://localhost:3000/tracks/${searchTerm}`)
     .then(res => res.json())
@@ -82,7 +82,7 @@ function App() {
 
   function goBack(){
     setDetailView(false)
-    history.push("/")
+    history.push("/home")
   }
 
   function loginToggle(){
@@ -105,14 +105,16 @@ function onRemoveFavorite(id){
   setFavorites(updatedFavorties)
 }
 
-
   return (
     <div className="App">
       <NavBar loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
       <Switch>
         <Route exact path="/">
-            <SearchBar searchClick={searchClick} handleChange={handleChange}/>
-            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
+          <About />
+        </Route>
+        <Route path="/home">
+            <SearchBar searchClick={searchClick} handleChange={handleChange} user={user} />
+            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack} />
             </Route>
           <Route path='/details/:id'>
             <SongDetail 
@@ -122,15 +124,17 @@ function onRemoveFavorite(id){
             />
           </Route>
         <Route path='/favorites'>
+
           <Favorites 
             favorites={favorites}
             onMoreInfoClick={onMoreInfoClick} 
             onRemoveFavorite={onRemoveFavorite}
             track={songSelection}/>
-            
+            isLogOn={isLogOn} />
+
         </Route>
         <Route path="/login">
-          <Login onLogin={setUser} loginToggle={loginToggle} setIsLogOn={setIsLogOn} />
+          <Login onLogin={setUser} loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
         </Route>
         <Route path="/new_user">
           <CreateAccount onLogin={setUser} setIsLogOn={setIsLogOn} />

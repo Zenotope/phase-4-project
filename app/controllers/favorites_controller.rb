@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+    before_action :authorize
 
     def index
         render json: Favorite.all
@@ -21,6 +22,10 @@ class FavoritesController < ApplicationController
     end
 
     private
+
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    end
 
     def song_params
         params.permit(:songId, :name, :artists, :album, :albumArt)

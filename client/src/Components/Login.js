@@ -1,9 +1,10 @@
 import {useState} from "react";
 import { NavLink, useHistory } from 'react-router-dom';
 
-function Login({onLogin, loginToggle, setIsLogOn}) {
+function Login({onLogin, loginToggle, isLogOn, setIsLogOn}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [errors, setErrors] = useState([])
 
     let history = useHistory();
     function handleSubmit(e){
@@ -22,13 +23,16 @@ function Login({onLogin, loginToggle, setIsLogOn}) {
         .then(res => {
             if (res.ok) {
               res.json()
-        .then(data => onLogin(data))
-        .then(setIsLogOn(true))
-        history.push('/')
-        }})
+              .then(data => onLogin(data))
+              .then(setIsLogOn(true))
+              history.push('/home')
+            } else {
+              res.json()
+              .then((errorData) => setErrors(errorData.error));
+              setPassword("")
+            }
+        })
     }
-
-
     return(
         <div className="login-box">
             <form onSubmit={handleSubmit}>
@@ -40,9 +44,10 @@ function Login({onLogin, loginToggle, setIsLogOn}) {
                     <small>Password</small>
                     <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
+                <ul style={{color: 'red'}}>{errors}</ul>
                 <div className="form-group">
-                    <button type="submit" onClick={loginToggle}>Login</button>
-                    <button>{<NavLink to="/new_user" style={{ textDecoration: 'none', color: 'black' }} >Sign Up</NavLink>}</button>
+                    <button type="submit" onClick={ isLogOn ? loginToggle : undefined } >Login</button>
+                    <button type="button" >{<NavLink to="/new_user" style={{ textDecoration: 'none', color: 'black' }} >Sign Up</NavLink>}</button>
                 </div>
             </form>
         </div>

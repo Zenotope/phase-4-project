@@ -1,6 +1,8 @@
 import SongCard from "./SongCard"
 
-function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, track}){
+
+function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, track, isLogOn}){
+
 
     const favoriteCollection = favorites.map((favorite) =>(
         <SongCard
@@ -17,6 +19,8 @@ function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, track}){
         // favId = {track.id}
         />
     ))
+
+    if(isLogOn === false) return <h1>You must login to view favorites!</h1>
 
     return(
         <div className="grid-container">

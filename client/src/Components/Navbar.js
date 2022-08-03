@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function NavBar({isLogOn, setIsLogOn}) {
+function NavBar({isLogOn, setIsLogOn, user}) {
 
     function handleLogout(){
         fetch("/logout", {
@@ -16,11 +16,11 @@ function NavBar({isLogOn, setIsLogOn}) {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand className="title" href="/">Detailify</Navbar.Brand>
+        <Navbar.Brand className="title" href="/home">Detailify</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">    
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="favorites">Favorites</Nav.Link>
             {/* <NavDropdown title="Favorites" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
