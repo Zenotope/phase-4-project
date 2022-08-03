@@ -1,11 +1,11 @@
 import {useState} from "react";
-import { NavLink } from 'react-router-dom';
-import CreateAccount from "./CreateAccount";
+import { NavLink, useHistory } from 'react-router-dom';
 
 function Login({onLogin, loginToggle, setIsLogOn}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
+    let history = useHistory();
     function handleSubmit(e){
         e.preventDefault()
         fetch('/login', {
@@ -22,6 +22,7 @@ function Login({onLogin, loginToggle, setIsLogOn}) {
         .then(res => res.json())
         .then(data => onLogin(data))
         .then(setIsLogOn(true))
+        history.push('/')
     }
 
 

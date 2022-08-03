@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function CreateAccount({onLogin, setIsLogOn}){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [passwordConfirm, setPasswordConfirm] = useState("")
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
+    let history = useHistory();
     function handleSubmit(e){
         e.preventDefault()
         fetch('/signup', {
@@ -17,12 +18,13 @@ function CreateAccount({onLogin, setIsLogOn}){
             body: JSON.stringify({
                 username: username,
                 password: password,
-                password_confimation: passwordConfirm
+                password_confirmation: passwordConfirmation
             }),
         })
         .then(res => res.json())
         .then(data => onLogin(data))
         .then(setIsLogOn(true))
+        history.push('/')
     }
 
     return(
@@ -38,7 +40,7 @@ function CreateAccount({onLogin, setIsLogOn}){
                 </div>
                 <div className="form-group">
                     <small>Confirm Password</small>
-                    <input type="password" name="password confirmation" value={passwordConfirm} onChange={e => setPasswordConfirm(e.target.value)} />
+                    <input type="password" name="password confirmation" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </div>
                 <div className="form-group">
                     <button type="submit">Create Account</button>
