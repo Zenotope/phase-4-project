@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function NavBar({isLogOn, setIsLogOn}) {
+function NavBar({isLogOn, setIsLogOn, user}) {
 
     function handleLogout(){
         fetch("/logout", {

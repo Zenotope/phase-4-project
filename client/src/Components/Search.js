@@ -19,7 +19,6 @@ function Search({tracks, onMoreInfoClick}){
      
     return(
         <div id="search" >
-            <p>Login to add favorites!</p>
             <div className="grid-container">
                 {trackCollection}
             </div>

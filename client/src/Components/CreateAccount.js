@@ -31,6 +31,8 @@ function CreateAccount({onLogin, setIsLogOn}){
             } else {
               res.json()
               .then((errorData) => setErrors(errorData.errors));
+              setPassword("")
+              setPasswordConfirmation("")
             }
         })
     }
