@@ -1,6 +1,11 @@
+
+*{
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
-  background-color: #282c34;
+
   color:rgba(255, 255, 255, 0.597); 
 }
 

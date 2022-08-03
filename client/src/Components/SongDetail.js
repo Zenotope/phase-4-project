@@ -1,5 +1,11 @@
 function SongDetail({goBack, details, track}){
 
+   
+    const keys = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    let key = keys.at(details.key)
+    
+    const modes = ["Minor", "Major"]
+    let mode = modes.at(details.mode)
 
     return(
         <div>
@@ -12,10 +18,10 @@ function SongDetail({goBack, details, track}){
             
             <div className="details-container">
                 <div className="card-details">
-                    <b>Mode:</b><p>{details.mode}</p>
+                    <b>Mode:</b><p>{mode}</p>
                 </div>
                 <div className="card-details">
-                    <b>Key:</b><p>{details.key}</p>
+                    <b>Key:</b><p>{key}</p>
                 </div>
                 <div className="card-details">
                     <b>Tempo:</b><p>{details.tempo}</p>
