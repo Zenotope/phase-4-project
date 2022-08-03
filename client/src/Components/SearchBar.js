@@ -1,9 +1,9 @@
 
-function SearchBar({searchClick, handleChange}){
+function SearchBar({searchClick, handleChange, user}){
   
-
-
     return(
+        <>
+            <h2>{user ? `Welcome ${user.username}!` : 'Login to add favorites!'}</h2>
         <div>
             <form action="/tracks/" method="GET" onSubmit={(e)=> searchClick(e)}>
                 <label htmlFor="header-search">
@@ -18,8 +18,8 @@ function SearchBar({searchClick, handleChange}){
                 />
                 <button type="submit" >Search</button>
             </form>
-   
         </div>
+        </>
     )
 }
 

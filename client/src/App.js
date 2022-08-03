@@ -19,7 +19,7 @@ function App() {
   const [isLogOn, setIsLogOn] = useState(false)
   const [details, setDetails] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
-  const[searchInput, setSearchInput] = useState("")
+  const [searchInput, setSearchInput] = useState("")
   const [trackId, setTrackId] = useState("")
   const [favorites, setFavorites] = useState([])
 
@@ -91,7 +91,6 @@ function onRemoveFavorite(id){
   setFavorites(updatedFavorties)
 }
 
-
   return (
     <div className="App">
       <NavBar loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
@@ -100,8 +99,8 @@ function onRemoveFavorite(id){
           <About />
         </Route>
         <Route path="/home">
-            <SearchBar searchClick={searchClick} handleChange={handleChange}/>
-            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
+            <SearchBar searchClick={searchClick} handleChange={handleChange} user={user} />
+            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack} />
             </Route>
           <Route path='/details/:id'>
           <SongDetail 
@@ -111,7 +110,7 @@ function onRemoveFavorite(id){
             />
           </Route>
         <Route path='/favorites'>
-          <Favorites favorites={favorites} onMoreInfoClick={onMoreInfoClick} onRemoveFavorite={onRemoveFavorite}/>
+          <Favorites favorites={favorites} onMoreInfoClick={onMoreInfoClick} onRemoveFavorite={onRemoveFavorite} isLogOn={isLogOn} />
         </Route>
         <Route path="/login">
           <Login onLogin={setUser} loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />

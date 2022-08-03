@@ -29,6 +29,7 @@ function Login({onLogin, loginToggle, isLogOn, setIsLogOn}) {
             } else {
               res.json()
               .then((errorData) => setErrors(errorData.error));
+              setPassword("")
             }
         })
     }
@@ -46,7 +47,7 @@ function Login({onLogin, loginToggle, isLogOn, setIsLogOn}) {
                 <ul style={{color: 'red'}}>{errors}</ul>
                 <div className="form-group">
                     <button type="submit" onClick={ isLogOn ? loginToggle : undefined } >Login</button>
-                    <button>{<NavLink to="/new_user" style={{ textDecoration: 'none', color: 'black' }} >Sign Up</NavLink>}</button>
+                    <button type="button" >{<NavLink to="/new_user" style={{ textDecoration: 'none', color: 'black' }} >Sign Up</NavLink>}</button>
                 </div>
             </form>
         </div>

@@ -1,6 +1,6 @@
 import SongCard from "./SongCard"
 
-function Favorites({favorites, onMoreInfoClick, onRemoveFavorite}){
+function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, isLogOn}){
 
  
     
@@ -18,6 +18,8 @@ function Favorites({favorites, onMoreInfoClick, onRemoveFavorite}){
         track= {track}
         />
     ))
+
+    if(isLogOn === false) return <h1>You must login to view favorites!</h1>
 
     return(
         <div className="grid-container">
