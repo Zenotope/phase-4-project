@@ -19,10 +19,13 @@ function Login({onLogin, loginToggle, setIsLogOn}) {
                 password: password
             }),
         })
-        .then(res => res.json())
+        .then(res => {
+            if (res.ok) {
+              res.json()
         .then(data => onLogin(data))
         .then(setIsLogOn(true))
         history.push('/')
+        }})
     }
 
 

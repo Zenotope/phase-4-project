@@ -31,15 +31,15 @@ function CreateAccount({onLogin, setIsLogOn}){
         <div className="login-box">
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <small>Username</small>
+                    <small>Username:</small>
                     <input type="text" name="username" value={username} onChange={e => setUsername(e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <small>Password</small>
+                    <small>Password:</small>
                     <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <small>Confirm Password</small>
+                    <small>Confirm Password:</small>
                     <input type="password" name="password confirmation" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </div>
                 <div className="form-group">
