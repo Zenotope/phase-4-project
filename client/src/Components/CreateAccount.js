@@ -5,6 +5,7 @@ function CreateAccount({onLogin, setIsLogOn}){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [errors, setErrors] = useState([])
 
     let history = useHistory();
     function handleSubmit(e){
@@ -21,12 +22,18 @@ function CreateAccount({onLogin, setIsLogOn}){
                 password_confirmation: passwordConfirmation
             }),
         })
-        .then(res => res.json())
-        .then(data => onLogin(data))
-        .then(setIsLogOn(true))
-        history.push('/')
+        .then(res => {
+            if (res.ok) {
+              res.json()
+              .then(data => onLogin(data))
+              .then(setIsLogOn(true))
+              history.push('/home')
+            } else {
+              res.json()
+              .then((errorData) => setErrors(errorData.errors));
+            }
+        })
     }
-
     return(
         <div className="login-box">
             <form onSubmit={handleSubmit}>
@@ -42,6 +49,13 @@ function CreateAccount({onLogin, setIsLogOn}){
                     <small>Confirm Password:</small>
                     <input type="password" name="password confirmation" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </div>
+                  {errors.length > 0 && (
+                    <ul style={{ color: "red" }}>
+                        {errors.map((error) => (
+                            <ul key={error}>{error}</ul>
+                        ))}
+                    </ul>
+                  )}
                 <div className="form-group">
                     <button type="submit">Create Account</button>
                 </div>
