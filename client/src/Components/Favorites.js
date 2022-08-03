@@ -6,7 +6,7 @@ function Favorites({favorites, onMoreInfoClick, onRemoveFavorite}){
     
     const favoriteCollection = favorites.map((track) =>(
         <SongCard
-        key = {track.id}
+        // key = {track.id}
         id= {track.songId}
         name ={track.name}
         artists ={track.artists}
@@ -16,6 +16,7 @@ function Favorites({favorites, onMoreInfoClick, onRemoveFavorite}){
         onMoreInfoClick = {onMoreInfoClick}
         onRemoveFavorite={onRemoveFavorite}
         track= {track}
+        favId = {track.id}
         />
     ))
 

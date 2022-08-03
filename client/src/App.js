@@ -77,12 +77,26 @@ function App() {
     setSongSelection(track)
     setTrackId(track.id)
     history.push(`/details/${id}`)
+   
   }
 
   function goBack(){
     setDetailView(false)
     history.push("/")
   }
+
+  function loginToggle(){
+    {user ? setIsLogOn(true) : setIsLogOn(false)}
+  }
+
+  useEffect(() => {
+    const data = window.sessionStorage.getItem('MY_APP_STATE');
+    if (data !== null) setIsLogOn(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem('MY_APP_STATE', JSON.stringify(isLogOn))
+  }, [isLogOn]);
 
 function onRemoveFavorite(id){
   console.log(favorites);
@@ -101,7 +115,7 @@ function onRemoveFavorite(id){
             <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack}/>
             </Route>
           <Route path='/details/:id'>
-          <SongDetail 
+            <SongDetail 
               goBack={goBack}
               details ={details}
               track={songSelection}
