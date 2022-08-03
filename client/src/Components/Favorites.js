@@ -1,22 +1,20 @@
 import SongCard from "./SongCard"
 
-function Favorites({favorites, onMoreInfoClick, onRemoveFavorite}){
+function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, track}){
 
- 
-    
-    const favoriteCollection = favorites.map((track) =>(
+    const favoriteCollection = favorites.map((favorite) =>(
         <SongCard
-        // key = {track.id}
-        id= {track.songId}
-        name ={track.name}
-        artists ={track.artists}
-        album = {track.album}
-        albumArt = {track.albumArt}
+        key = {favorite.id}
+        id= {favorite.songId}
+        name ={favorite.name}
+        artists ={favorite.artists}
+        album = {favorite.album}
+        albumArt = {favorite.albumArt}
         // preview = {track.preview_url}
         onMoreInfoClick = {onMoreInfoClick}
         onRemoveFavorite={onRemoveFavorite}
         track= {track}
-        favId = {track.id}
+        // favId = {track.id}
         />
     ))
 

@@ -71,14 +71,14 @@ function App() {
   }
 
   const history = useHistory(); 
-  
+
   function onMoreInfoClick(e, track, id){
     setDetailView(true)
     setSongSelection(track)
-    setTrackId(track.id)
+    setTrackId(id)
     history.push(`/details/${id}`)
-   
   }
+  
 
   function goBack(){
     setDetailView(false)
@@ -122,7 +122,12 @@ function onRemoveFavorite(id){
             />
           </Route>
         <Route path='/favorites'>
-          <Favorites favorites={favorites} onMoreInfoClick={onMoreInfoClick} onRemoveFavorite={onRemoveFavorite}/>
+          <Favorites 
+            favorites={favorites}
+            onMoreInfoClick={onMoreInfoClick} 
+            onRemoveFavorite={onRemoveFavorite}
+            track={songSelection}/>
+            
         </Route>
         <Route path="/login">
           <Login onLogin={setUser} loginToggle={loginToggle} setIsLogOn={setIsLogOn} />

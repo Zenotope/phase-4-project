@@ -7,14 +7,22 @@ function SongDetail({goBack, details, track}){
     const modes = ["Minor", "Major"]
     let mode = modes.at(details.mode)
 
+    // let acousticness = ""
+    // if(details.acousticness >= .6){acousticness = "Yes"}
+    // else {acousticness = "No"};
+
+    // console.log(details)
+    // console.log(track)
+    // console.log(acousticness)
+
     return(
         <div>
             <button onClick={goBack}>Go Back</button>
             <div></div>
-            <img src={track.album.images[1].url}/>
-            <h3>{track.artists[0].name}</h3>
+            {/* <img src={track.album.images[1].url}/>
+            <h3>{track.artists[0].name}</h3> */}
             <h3>{track.name}</h3>
-            <h3>{track.album.name}</h3>
+            {/* <h3>{track.album.name}</h3> */}
             
             <div className="details-container">
                 <div className="card-details">
@@ -27,7 +35,7 @@ function SongDetail({goBack, details, track}){
                     <b>Tempo:</b><p>{details.tempo}</p>
                 </div>
                 <div className="card-details">
-                     <b>Time Signature:</b><p>{details.time_signature}</p>
+                     <b>Time Signature:</b><p>{details.time_signature}/4</p>
                 </div>
                 <div className="card-details">
                     <b>Acousticness:</b><p>{details.acousticness}</p>
