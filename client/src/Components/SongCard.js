@@ -1,6 +1,5 @@
-function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick, track, onRemoveFavorite, favId}){
+function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick, track, onRemoveFavorite, favId, favState}){
     
-    console.log(track)
     function handleAddFavorite(){
         const favoriteData = {
             songId: id,
@@ -20,10 +19,10 @@ function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick,
     }
 
     function handleRemoveFavorite(){
-        fetch(`/favorites/${track.id}`, {
+        fetch(`/favorites/${favId}`, {
           method: "DELETE",
         })
-        .then(()=> onRemoveFavorite(track.id))
+        .then(()=> onRemoveFavorite(favId))
       }
 
       
@@ -38,9 +37,11 @@ function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick,
             <div></div>
             <b>{album}</b>
             <div></div>
-            <button onClick={(e)=> onMoreInfoClick(e, track, id)} >More Info</button>
-            <button onClick={handleAddFavorite}>Add To Favorites</button>
-            <button onClick={handleRemoveFavorite}>Remove From Favorites</button>
+            <button onClick={(e)=> onMoreInfoClick(e, track, id, artists, album, albumArt)} >More Info</button>
+            {favState ? (<button onClick={handleRemoveFavorite}>Remove From Favorites</button>)
+            :(<button onClick={handleAddFavorite}>Add To Favorites</button>)
+    }
+            
         </div>
     )
 }

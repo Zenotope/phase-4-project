@@ -14,7 +14,7 @@ import CreateAccount from './Components/CreateAccount';
 function App() {
   const [tracks, setTracks] = useState([])
   const [detailView, setDetailView] = useState(false)
-  const [songSelection, setSongSelection] = useState({})
+  const [songSelection, setSongSelection] = useState([])
   const [user, setUser] = useState(null)
   const [isLogOn, setIsLogOn] = useState(false)
   const [details, setDetails] = useState([])
@@ -22,6 +22,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("")
   const [trackId, setTrackId] = useState("")
   const [favorites, setFavorites] = useState([])
+  
 
   useEffect(() =>{
     fetch(`http://localhost:3000/tracks/${searchTerm}`)
@@ -72,7 +73,14 @@ function App() {
 
   const history = useHistory(); 
 
-  function onMoreInfoClick(e, track, id){
+  const [artist, setArtists] = useState("")
+  const [album, setAlbum] = useState("")
+  const [albumArt, setAlbumArt] = useState("")
+
+  function onMoreInfoClick(e, track, id, artists,  album, albumArt){
+    setArtists(artists)
+    setAlbum(album)
+    setAlbumArt(albumArt)
     setDetailView(true)
     setSongSelection(track)
     setTrackId(id)
@@ -99,7 +107,6 @@ function App() {
   }, [isLogOn]);
 
 function onRemoveFavorite(id){
-  console.log(favorites);
    const updatedFavorties =
   favorites.filter((favorite) => favorite.id !== id)
   setFavorites(updatedFavorties)
@@ -121,6 +128,9 @@ function onRemoveFavorite(id){
               goBack={goBack}
               details ={details}
               track={songSelection}
+              artists={artist}
+              album={album}
+              albumArt={albumArt}
             />
           </Route>
         <Route path='/favorites'>
@@ -130,7 +140,9 @@ function onRemoveFavorite(id){
             onMoreInfoClick={onMoreInfoClick} 
             onRemoveFavorite={onRemoveFavorite}
             track={songSelection}
-            isLogOn={isLogOn} />
+            isLogOn={isLogOn} 
+            artists={artist}/>
+
 
         </Route>
         <Route path="/login">

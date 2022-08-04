@@ -1,4 +1,4 @@
-function SongDetail({goBack, details, track}){
+function SongDetail({goBack, details, track, artists, album, albumArt}){
 
    
     const keys = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
@@ -14,15 +14,17 @@ function SongDetail({goBack, details, track}){
     // console.log(details)
     // console.log(track)
     // console.log(acousticness)
+    console.log(artists)
 
     return(
         <div>
-            <button onClick={goBack}>Go Back</button>
+            {/* <button onClick={backToFavs}>Favorites</button> */}
+            <button onClick={goBack}>Search</button>
             <div></div>
-            {/* <img src={track.album.images[1].url}/>
-            <h3>{track.artists[0].name}</h3> */}
+            <img src={albumArt}/>
+            <h3>{artists}</h3>
             <h3>{track.name}</h3>
-            {/* <h3>{track.album.name}</h3> */}
+            <h3>{album}</h3>
             
             <div className="details-container">
                 <div className="card-details">
