@@ -1,7 +1,7 @@
 import SongCard from "./SongCard"
 
 
-function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, track, isLogOn, artists}){
+function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, track, isLogOn, artists, userId}){
     let favoriteState = true
 
     const favoriteCollection = favorites.map((favorite) =>(

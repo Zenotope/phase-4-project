@@ -1,12 +1,14 @@
-function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick, track, onRemoveFavorite, favId, favState}){
+function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick, track, onRemoveFavorite, favId, favState, user_id}){
     
+  
     function handleAddFavorite(){
         const favoriteData = {
             songId: id,
             name,
             artists,
             album,
-            albumArt
+            albumArt,
+            user_id,
         }
         fetch('/favorites',{
             method: "POST",
@@ -14,8 +16,10 @@ function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick,
               "Content-Type": "application/json",
             },
             body: JSON.stringify(favoriteData),
-           
-          }) 
+            
+          })
+          .then((r)=> r.json) 
+          .then((favoriteData) => setFavorites(favoriteData))
     }
 
     function handleRemoveFavorite(){
@@ -37,9 +41,9 @@ function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick,
             <div></div>
             <b>{album}</b>
             <div></div>
-            <button onClick={(e)=> onMoreInfoClick(e, track, id, artists, album, albumArt)} >More Info</button>
-            {favState ? (<button onClick={handleRemoveFavorite}>Remove From Favorites</button>)
-            :(<button onClick={handleAddFavorite}>Add To Favorites</button>)
+            <button className="card-btn" onClick={(e)=> onMoreInfoClick(e, track, id, artists, album, albumArt)} >More Info</button>
+            {favState ? (<button className="card-btn" onClick={handleRemoveFavorite}>Remove From Favorites</button>)
+            :(<button className="card-btn"onClick={handleAddFavorite}>Add To Favorites</button>)
     }
             
         </div>

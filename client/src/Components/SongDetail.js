@@ -7,6 +7,11 @@ function SongDetail({goBack, details, track, artists, album, albumArt}){
     const modes = ["Minor", "Major"]
     let mode = modes.at(details.mode)
 
+    const energy =(details.energy * 100).toFixed(2) 
+    const danceability = (details.danceability * 100).toFixed(2)
+    const valence =(details.valence * 100).toFixed(2)
+    const acousticness = (details.acousticness * 100).toFixed(2)
+
     // let acousticness = ""
     // if(details.acousticness >= .6){acousticness = "Yes"}
     // else {acousticness = "No"};
@@ -14,55 +19,57 @@ function SongDetail({goBack, details, track, artists, album, albumArt}){
     // console.log(details)
     // console.log(track)
     // console.log(acousticness)
-    console.log(artists)
+    
 
     return(
         <div>
             {/* <button onClick={backToFavs}>Favorites</button> */}
-            <button onClick={goBack}>Search</button>
+            <button className="card-btn" onClick={goBack}>Back To Search</button>
             <div></div>
-            <img src={albumArt}/>
+            <img style={{margin: "15px"}} src={albumArt}/>
             <h3>{artists}</h3>
             <h3>{track.name}</h3>
             <h3>{album}</h3>
             
             <div className="details-container">
                 <div className="card-details">
-                    <b>Mode:</b><p>{mode}</p>
+                    <b>Mode:</b><p className="stat">{mode}</p>
                 </div>
                 <div className="card-details">
-                    <b>Key:</b><p>{key}</p>
+                    <b>Key:</b><p className="stat">{key}</p>
                 </div>
                 <div className="card-details">
-                    <b>Tempo:</b><p>{details.tempo}</p>
+                    <b>Tempo:</b><p className="stat">{details.tempo}</p>
                 </div>
                 <div className="card-details">
-                     <b>Time Signature:</b><p>{details.time_signature}/4</p>
+                     <b>Time Signature:</b><p className="stat">{details.time_signature}/4</p>
                 </div>
                 <div className="card-details">
-                    <b>Acousticness:</b><p>{details.acousticness}</p>
+                    <b>Acousticness:</b><p className="stat">{acousticness}%</p>
                 </div>
                 <div className="card-details">
-                    <b>Energy:</b><p>{details.energy}</p>
+                    <b>Energy:</b><p className="stat">{energy}%</p>
                 </div>      
                 <div className="card-details">
-                    <b>Danceability:</b><p>{details.danceability}</p>
+                    <b>Danceability:</b><p className="stat">{danceability}%</p>
                 </div>
                 <div className="card-details">
-                    <b>Instrumentalness:</b><p>{details.instrumentalness}</p>
+                    <b>Happiness:</b><p className="stat">{valence}%</p>
                 </div>
                 <div className="card-details">
-                    <b>Loudness:</b><p>{details.loudness}</p>
+                    <b>Loudness:</b><p className="stat">{details.loudness}</p>
                 </div>
                 <div className="card-details">
-                    <b>Liveness:</b><p>{details.liveness}</p>
+                    <b>Instrumentalness:</b><p className="stat">{details.instrumentalness}</p>
+                </div>
+                
+                <div className="card-details">
+                    <b>Liveness:</b><p className="stat">{details.liveness}</p>
                 </div>
                 <div className="card-details">
-                    <b>Speechiness:</b><p>{details.speechiness}</p>
+                    <b>Speechiness:</b><p className="stat">{details.speechiness}</p>
                 </div>
-                <div className="card-details">
-                    <b>Valence:</b><p>{details.valence}</p>
-                </div>
+                
             </div>
             
         </div>
