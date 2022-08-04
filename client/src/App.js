@@ -143,6 +143,7 @@ function onRemoveFavorite(id){
             isLogOn={isLogOn} 
             artists={artist}/>
 
+
         </Route>
         <Route path="/login">
           <Login onLogin={setUser} loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
