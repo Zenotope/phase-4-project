@@ -16,7 +16,7 @@ function NavBar({isLogOn, setIsLogOn, user}) {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand className="title" href="/home">Detailify</Navbar.Brand>
+        <Navbar.Brand style={{color: 'green'}} className="title" href="/home">Detailify</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">    
           <Nav className="me-auto">

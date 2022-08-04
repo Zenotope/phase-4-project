@@ -2,7 +2,7 @@ import SongCard from "./SongCard"
 
 
 function Search({tracks, onMoreInfoClick}){
-
+    
     const trackCollection = tracks.map((track) =>(
         <SongCard
         key = {track.id}
