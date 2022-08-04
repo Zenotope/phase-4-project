@@ -54,13 +54,21 @@ function App() {
     .then((details)=> setDetails(details))
   }, [trackId])
   
+  // const userId = user.id
+  console.log(user) 
+
 
   useEffect(()=>{
     fetch('http://localhost:3000/favorites')
     .then(res => res.json())
     .then((favorites)=> setFavorites(favorites))
   }, [])
- 
+
+//  console.log(favorites)
+// filter((favorite) => favorite.user_id === user)
+
+console.log(favorites)
+  // console.log(userId)
 
   function handleChange(input){
    setSearchInput(input)
@@ -93,24 +101,13 @@ function App() {
     history.push("/home")
   }
 
-  function loginToggle(){
-    {user ? setIsLogOn(true) : setIsLogOn(false)}
-  }
-
-  useEffect(() => {
-    const data = window.sessionStorage.getItem('MY_APP_STATE');
-    if (data !== null) setIsLogOn(JSON.parse(data));
-  }, []);
-
-  useEffect(() => {
-    window.sessionStorage.setItem('MY_APP_STATE', JSON.stringify(isLogOn))
-  }, [isLogOn]);
 
 function onRemoveFavorite(id){
    const updatedFavorties =
   favorites.filter((favorite) => favorite.id !== id)
   setFavorites(updatedFavorties)
 }
+
 
   return (
     <div className="App">
@@ -121,7 +118,7 @@ function onRemoveFavorite(id){
         </Route>
         <Route path="/home">
             <SearchBar searchClick={searchClick} handleChange={handleChange} user={user} />
-            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack} />
+            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack} user={user} />
             </Route>
           <Route path='/details/:id'>
             <SongDetail 
@@ -141,7 +138,8 @@ function onRemoveFavorite(id){
             onRemoveFavorite={onRemoveFavorite}
             track={songSelection}
             isLogOn={isLogOn} 
-            artists={artist}/>
+            artists={artist}
+            />
 
 
         </Route>
