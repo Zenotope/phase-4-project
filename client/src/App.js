@@ -129,7 +129,7 @@ function onRemoveFavorite(id){
             favorites={favorites}
             onMoreInfoClick={onMoreInfoClick} 
             onRemoveFavorite={onRemoveFavorite}
-            track={songSelection}/>
+            track={songSelection}
             isLogOn={isLogOn} />
 
         </Route>

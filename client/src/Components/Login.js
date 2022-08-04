@@ -1,3 +1,4 @@
+import './login.css'
 import {useState} from "react";
 import { NavLink, useHistory } from 'react-router-dom';
 
@@ -5,6 +6,7 @@ function Login({onLogin, loginToggle, isLogOn, setIsLogOn}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState([])
+
 
     let history = useHistory();
     function handleSubmit(e){
@@ -33,21 +35,25 @@ function Login({onLogin, loginToggle, isLogOn, setIsLogOn}) {
             }
         })
     }
+
+    const nav = () => {
+        history.push('/new_user')
+    }
+
     return(
         <div className="login-box">
-            <form onSubmit={handleSubmit}>
+            <form id="login" onSubmit={handleSubmit}>
+            <h2 id="login-header">Login to Your Account</h2>
                 <div className="form-group">
-                    <small>Username</small>
-                    <input type="text" name="username" value={username} onChange={e => setUsername(e.target.value)} />
+                    <input type="text" className="login-input" name="username" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <small>Password</small>
-                    <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type="password" className="login-input" name="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
                 <ul style={{color: 'red'}}>{errors}</ul>
-                <div className="form-group">
-                    <button type="submit" onClick={ isLogOn ? loginToggle : undefined } >Login</button>
-                    <button type="button" >{<NavLink to="/new_user" style={{ textDecoration: 'none', color: 'black' }} >Sign Up</NavLink>}</button>
+                <div id="login-btns">
+                    <button type="submit" id="login-btn" onClick={ isLogOn ? loginToggle : undefined } >Login</button>
+                    <button type="button" id="signup-btn" onClick={nav} >Sign Up</button>
                 </div>
             </form>
         </div>

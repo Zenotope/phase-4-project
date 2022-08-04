@@ -1,3 +1,4 @@
+import './createAccount.css'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 
@@ -38,18 +39,16 @@ function CreateAccount({onLogin, setIsLogOn}){
     }
     return(
         <div className="login-box">
-            <form onSubmit={handleSubmit}>
+            <form id="signup" onSubmit={handleSubmit}>
+            <h2 id="signup-header">Create New Account</h2>
                 <div className="form-group">
-                    <small>Username:</small>
-                    <input type="text" name="username" value={username} onChange={e => setUsername(e.target.value)} />
+                    <input type="text" name="username" className="signup-input" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <small>Password:</small>
-                    <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type="password" name="password" className="signup-input" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <small>Confirm Password:</small>
-                    <input type="password" name="password confirmation" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
+                    <input type="password" name="password confirmation" className="signup-input" placeholder="Confirm Password" value={passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)} />
                 </div>
                   {errors.length > 0 && (
                     <ul style={{ color: "red" }}>
@@ -59,7 +58,7 @@ function CreateAccount({onLogin, setIsLogOn}){
                     </ul>
                   )}
                 <div className="form-group">
-                    <button type="submit">Create Account</button>
+                    <button type="submit" id="create-acct-btn">Create Account</button>
                 </div>
             </form>
         </div>

@@ -1,0 +1,72 @@
+.login-box{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#signup{
+    min-width: 100%;
+    height: 100vh;
+    /* border: dashed limegreen .5vw; */
+    margin: 0vw;
+    padding: 5vw;
+    position: relative;
+}
+
+#signup-header{
+    text-align: center;
+    font-size: 35px;
+    margin:  0 0 .5vh 0;
+    color: limegreen;
+}
+
+.form-group{
+    margin: .5vh 0 0 0 ;
+    display: grid;
+    place-items: center;
+}
+
+.signup-input{
+    border: solid #4f5250 .75vh;
+    display: block;
+    width: 35%;
+    padding: .5rem .8rem .5rem .8rem;
+    margin: 0 auto;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #FFF;
+    font-weight: 600;
+}
+
+#create-acct-btn{
+    display: inline-block;
+    width: 20%;
+    height: 3rem;
+    color: limegreen;
+    border: 0;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#create-acct-btn{
+    margin: 1rem 0 1rem 0;
+    border-radius: 20px 0 20px 0;
+    border: solid #4f5250;
+}
+
+#create-acct-btn:hover{
+    background-color: #3c3d40;
+    transition: 1s background ease;
+}
+
+/* remove chrome autofill colors */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #282c34 inset !important;
+}
+input:-webkit-autofill{
+    -webkit-text-fill-color: #FFF !important;
+}
