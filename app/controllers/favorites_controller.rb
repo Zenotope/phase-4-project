@@ -4,7 +4,7 @@ class FavoritesController < ApplicationController
     def index
         # return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
         # favorite = Favorite.includes(:user)
-        favorite = Favorite.all
+        favorite = Favorite.where(params[:user_id])
         render json: favorite 
     end
 

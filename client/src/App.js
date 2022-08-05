@@ -22,6 +22,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("")
   const [trackId, setTrackId] = useState("")
   const [favorites, setFavorites] = useState([])
+  const [userId, setUserId] = useState("")
   
 
   useEffect(() =>{
@@ -38,9 +39,11 @@ function App() {
         res.json()
         .then(user => setUser(user))
         .then(setIsLogOn(true))
+        // .then(setUserId(user.id))
       }
     })
   }, [])
+
 
   function loginToggle(){
     {isLogOn === true ? setIsLogOn(true) : setIsLogOn(false)}
@@ -55,20 +58,20 @@ function App() {
   }, [trackId])
   
   // const userId = user.id
-  console.log(user) 
+  // console.log(userId)
+  // console.log(user.id) 
+ 
 
 
   useEffect(()=>{
     fetch('http://localhost:3000/favorites')
     .then(res => res.json())
-    .then((favorites)=> setFavorites(favorites))
-  }, [])
+    .then((favorites)=> setFavorites(favorites.filter((favorite) => favorite.user_id === user.id)))
+  }, [user])
 
-//  console.log(favorites)
-// filter((favorite) => favorite.user_id === user)
+// console.log(favorites)
 
-console.log(favorites)
-  // console.log(userId)
+
 
   function handleChange(input){
    setSearchInput(input)
