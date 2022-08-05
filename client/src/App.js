@@ -23,7 +23,6 @@ function App() {
   const [trackId, setTrackId] = useState("")
   const [favorites, setFavorites] = useState([])
   const [userId, setUserId] = useState("")
-  
 
   useEffect(() =>{
     fetch(`http://localhost:3000/tracks/${searchTerm}`)
@@ -39,11 +38,9 @@ function App() {
         res.json()
         .then(user => setUser(user))
         .then(setIsLogOn(true))
-        // .then(setUserId(user.id))
       }
     })
   }, [])
-
 
   function loginToggle(){
     {isLogOn === true ? setIsLogOn(true) : setIsLogOn(false)}
@@ -61,8 +58,6 @@ function App() {
   // console.log(userId)
   // console.log(user.id) 
  
-
-
   useEffect(()=>{
     fetch('http://localhost:3000/favorites')
     .then(res => res.json())
@@ -70,8 +65,6 @@ function App() {
   }, [user])
 
 // console.log(favorites)
-
-
 
   function handleChange(input){
    setSearchInput(input)
@@ -83,7 +76,6 @@ function App() {
   }
 
   const history = useHistory(); 
-
   const [artist, setArtists] = useState("")
   const [album, setAlbum] = useState("")
   const [albumArt, setAlbumArt] = useState("")
@@ -97,13 +89,11 @@ function App() {
     setTrackId(id)
     history.push(`/details/${id}`)
   }
-  
 
   function goBack(){
     setDetailView(false)
     history.push("/home")
   }
-
 
 function onRemoveFavorite(id){
    const updatedFavorties =
@@ -143,7 +133,6 @@ function onRemoveFavorite(id){
             artists={artist}
             />
 
-
         </Route>
         <Route path="/login">
           <Login onLogin={setUser} loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
@@ -155,7 +144,6 @@ function onRemoveFavorite(id){
     </div>
   );
 }
-
 export default App;
 
 

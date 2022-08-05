@@ -36,7 +36,6 @@ function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, track, isLogOn
     // <h1 id="error">You must login to view favorites!</h1>
     // 
 
-
     return(
         <div>
             {displayLogin && !isLogOn ? <h1 id="error">You must login to view favorites!</h1>
