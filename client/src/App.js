@@ -108,7 +108,6 @@ function onRemoveFavorite(id){
   setFavorites(updatedFavorties)
 }
 
-
   return (
     <div className="App">
       <NavBar loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />

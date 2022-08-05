@@ -1,0 +1,32 @@
+#title{
+    text-align: center;
+    font-size: 14vh;
+    margin:  0 0 6vh 0;
+    color: limegreen;
+}
+
+#small-title{
+    margin: 10vh 0 0 0;
+}
+
+#about-btn{
+    display: inline-block;
+    width: 20%;
+    height: 3rem;
+    color: limegreen;
+    border: 0;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#about-btn{
+    margin: 4rem 0 1rem 0;
+    border-radius: 20px 0 20px 0;
+    border: solid #4f5250;
+}
+
+#about-btn:hover{
+    background-color: #3c3d40;
+    transition: 1s background ease;
+}
