@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 function About(){
     let history = useHistory();
     function handleClick(){
-        history.push('/home')
+        history.push('/login')
     }
     return(
         <div>

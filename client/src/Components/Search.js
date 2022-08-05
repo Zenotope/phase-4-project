@@ -18,7 +18,7 @@ function Search({tracks, onMoreInfoClick, user}){
         user_id = {user.id}
         />
     ))
-     
+    
     return(
         <div id="search" >
             <div className="grid-container">

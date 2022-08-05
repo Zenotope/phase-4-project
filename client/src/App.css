@@ -46,7 +46,7 @@ b{
   background-color: #313439;
   display:  inline-grid;
   grid-template-columns: repeat(2, 1fr);
-  align-items: center;
+  align-items: end;
 }
 
 .card-details{
