@@ -1,2 +1,0 @@
-class SongId < ApplicationRecord
-end

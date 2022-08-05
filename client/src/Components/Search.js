@@ -1,8 +1,9 @@
 import SongCard from "./SongCard"
 
 
-function Search({tracks, onMoreInfoClick}){
-
+function Search({tracks, onMoreInfoClick, user}){
+    
+   
     const trackCollection = tracks.map((track) =>(
         <SongCard
         key = {track.id}
@@ -14,6 +15,7 @@ function Search({tracks, onMoreInfoClick}){
         preview = {track.preview_url}
         onMoreInfoClick = {onMoreInfoClick}
         track= {track}
+        user_id = {user.id}
         />
     ))
      

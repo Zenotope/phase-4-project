@@ -14,7 +14,7 @@ import CreateAccount from './Components/CreateAccount';
 function App() {
   const [tracks, setTracks] = useState([])
   const [detailView, setDetailView] = useState(false)
-  const [songSelection, setSongSelection] = useState({})
+  const [songSelection, setSongSelection] = useState([])
   const [user, setUser] = useState(null)
   const [isLogOn, setIsLogOn] = useState(false)
   const [details, setDetails] = useState([])
@@ -22,6 +22,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("")
   const [trackId, setTrackId] = useState("")
   const [favorites, setFavorites] = useState([])
+  
 
   useEffect(() =>{
     fetch(`http://localhost:3000/tracks/${searchTerm}`)
@@ -53,13 +54,21 @@ function App() {
     .then((details)=> setDetails(details))
   }, [trackId])
   
+  // const userId = user.id
+  console.log(user) 
+
 
   useEffect(()=>{
     fetch('http://localhost:3000/favorites')
     .then(res => res.json())
     .then((favorites)=> setFavorites(favorites))
   }, [])
- 
+
+//  console.log(favorites)
+// filter((favorite) => favorite.user_id === user)
+
+console.log(favorites)
+  // console.log(userId)
 
   function handleChange(input){
    setSearchInput(input)
@@ -72,7 +81,14 @@ function App() {
 
   const history = useHistory(); 
 
-  function onMoreInfoClick(e, track, id){
+  const [artist, setArtists] = useState("")
+  const [album, setAlbum] = useState("")
+  const [albumArt, setAlbumArt] = useState("")
+
+  function onMoreInfoClick(e, track, id, artists,  album, albumArt){
+    setArtists(artists)
+    setAlbum(album)
+    setAlbumArt(albumArt)
     setDetailView(true)
     setSongSelection(track)
     setTrackId(id)
@@ -85,26 +101,13 @@ function App() {
     history.push("/home")
   }
 
-  function loginToggle(){
-    {user ? setIsLogOn(true) : setIsLogOn(false)}
-  }
-
-  useEffect(() => {
-    const data = window.sessionStorage.getItem('MY_APP_STATE');
-    if (data !== null) setIsLogOn(JSON.parse(data));
-  }, []);
-
-  useEffect(() => {
-    window.sessionStorage.setItem('MY_APP_STATE', JSON.stringify(isLogOn))
-  }, [isLogOn]);
 
 function onRemoveFavorite(id){
-  console.log(favorites);
    const updatedFavorties =
   favorites.filter((favorite) => favorite.id !== id)
   setFavorites(updatedFavorties)
 }
-console.log(user)
+
   return (
     <div className="App">
       <NavBar loginToggle={loginToggle} isLogOn={isLogOn} setIsLogOn={setIsLogOn} />
@@ -114,13 +117,16 @@ console.log(user)
         </Route>
         <Route path="/home">
             <SearchBar searchClick={searchClick} handleChange={handleChange} user={user} />
-            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack} />
+            <Search tracks={tracks} onMoreInfoClick={onMoreInfoClick} goBack={goBack} user={user} />
             </Route>
           <Route path='/details/:id'>
             <SongDetail 
               goBack={goBack}
               details ={details}
               track={songSelection}
+              artists={artist}
+              album={album}
+              albumArt={albumArt}
             />
           </Route>
         <Route path='/favorites'>
@@ -130,7 +136,10 @@ console.log(user)
             onMoreInfoClick={onMoreInfoClick} 
             onRemoveFavorite={onRemoveFavorite}
             track={songSelection}
-            isLogOn={isLogOn} />
+            isLogOn={isLogOn} 
+            artists={artist}
+            />
+
 
         </Route>
         <Route path="/login">
