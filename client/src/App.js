@@ -15,7 +15,7 @@ function App() {
   const [tracks, setTracks] = useState([])
   const [detailView, setDetailView] = useState(false)
   const [songSelection, setSongSelection] = useState([])
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({id: 0, username: "Guest"})
   const [isLogOn, setIsLogOn] = useState(false)
   const [details, setDetails] = useState([])
   const [searchTerm, setSearchTerm] = useState("")

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import './favorites.css'
 import SongCard from "./SongCard"
 
@@ -22,12 +23,28 @@ function Favorites({favorites, onMoreInfoClick, onRemoveFavorite, track, isLogOn
         />
     ))
 
-    if(isLogOn === false) return <h1 id="error">You must login to view favorites!</h1>
+    const [displayLogin, setDisplayLogin] = useState(false)
+
+    useEffect(()=>{
+        const timer = setTimeout(()=>{
+            console.log("test")
+            setDisplayLogin(true)
+        }, 300)
+        return () => clearTimeout(timer)
+    }, [])
+
+    // <h1 id="error">You must login to view favorites!</h1>
+    // 
 
 
     return(
-        <div className="grid-container">
+        <div>
+            {displayLogin && !isLogOn ? <h1 id="error">You must login to view favorites!</h1>
+            : 
+        
+        <div className="grid-container">    
             {favoriteCollection}
+        </div> }
         </div>
     )
 }

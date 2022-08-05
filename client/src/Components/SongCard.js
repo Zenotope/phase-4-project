@@ -31,7 +31,9 @@ function SongCard({name, artists, preview, id, album, albumArt, onMoreInfoClick,
       
     return(
         <div className="songCard">
-            <img src={albumArt}/>
+            <div className="imgDiv">
+            <img className="cardImg" src={albumArt}/>
+            </div>
             {/* <audio src={preview}></audio> */}
             <div></div>
             <b>{name}</b>
