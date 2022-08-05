@@ -24,7 +24,7 @@ function SongDetail({goBack, details, track, artists, album, albumArt}){
     return(
         <div>
             {/* <button onClick={backToFavs}>Favorites</button> */}
-            <button className="card-btn" onClick={goBack}>Back To Search</button>
+            <button className="back-btn" onClick={goBack}>Back To Search</button>
             <div></div>
             <img style={{margin: "15px"}} src={albumArt}/>
             <h3>{artists}</h3>
